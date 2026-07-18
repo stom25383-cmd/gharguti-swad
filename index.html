@@ -1,678 +1,737 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wasim's Cloud Kitchen – Solapur</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gharguti Swad - Pure, Homemade, Authentic</title>
+    <style>
+        /* CSS Variables for Premium Theme */
+        :root {
+            --primary-orange: #CC4A2A;
+            --primary-green: #2C5E3A;
+            --bg-color: #FDFBF7;
+            --text-dark: #333333;
+            --text-light: #777777;
+            --white: #FFFFFF;
+        }
 
-    :root {
-      --saffron:   #E8651A;
-      --deep:      #1A0A00;
-      --cream:     #FDF6EC;
-      --gold:      #C8921A;
-      --smoke:     #F5EDE0;
-      --text:      #2C1500;
-      --muted:     #7A5C3E;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    html { scroll-behavior: smooth; }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+        }
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--cream);
-      color: var(--text);
-      overflow-x: hidden;
-    }
+        /* Header & Navbar */
+        header {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .brand h1 {
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+        
+        .brand p {
+            font-size: 0.8rem;
+            color: #E2E8F0;
+        }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(26,10,0,0.95);
-      backdrop-filter: blur(8px);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 14px 28px;
-    }
-    .nav-logo {
-      font-family: 'Playfair Display', serif;
-      color: var(--gold);
-      font-size: 1.2rem;
-      letter-spacing: 0.5px;
-    }
-    .nav-links { display: flex; gap: 24px; }
-    .nav-links a {
-      color: #e8d5c0;
-      text-decoration: none;
-      font-size: 0.88rem;
-      font-weight: 500;
-      letter-spacing: 0.3px;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--gold); }
+        .cart-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: relative;
+        }
 
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
-      background: var(--deep);
-      display: flex; align-items: center; justify-content: center;
-      text-align: center;
-      padding: 100px 24px 60px;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 60% 40%, rgba(232,101,26,0.18) 0%, transparent 70%),
-                  radial-gradient(ellipse at 20% 80%, rgba(200,146,26,0.12) 0%, transparent 60%);
-    }
-    .hero-spice {
-      position: absolute;
-      font-size: 7rem;
-      opacity: 0.06;
-      user-select: none;
-      animation: drift 12s ease-in-out infinite alternate;
-    }
-    .hero-spice:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
-    .hero-spice:nth-child(2) { top: 60%; right: 8%; animation-delay: 3s; }
-    .hero-spice:nth-child(3) { bottom: 15%; left: 20%; animation-delay: 6s; }
-    @keyframes drift { from { transform: translateY(0) rotate(0deg); } to { transform: translateY(-20px) rotate(8deg); } }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background-color: var(--primary-orange);
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
 
-    .hero-content { position: relative; z-index: 1; max-width: 680px; }
-    .hero-eyebrow {
-      display: inline-block;
-      background: rgba(232,101,26,0.2);
-      border: 1px solid rgba(232,101,26,0.4);
-      color: var(--saffron);
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 6px 16px;
-      border-radius: 20px;
-      margin-bottom: 24px;
-    }
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.6rem, 7vw, 4.8rem);
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.08;
-      margin-bottom: 10px;
-    }
-    .hero h1 span { color: var(--saffron); }
-    .hero-tagline {
-      color: #c9b49a;
-      font-size: 1.05rem;
-      margin: 16px 0 36px;
-      line-height: 1.6;
-    }
-    .hero-badges {
-      display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
-      margin-bottom: 40px;
-    }
-    .badge {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.15);
-      color: #e8d5c0;
-      font-size: 0.82rem;
-      padding: 7px 16px;
-      border-radius: 20px;
-    }
-    .hero-cta {
-      display: inline-block;
-      background: var(--saffron);
-      color: #fff;
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 15px 36px;
-      border-radius: 50px;
-      text-decoration: none;
-      box-shadow: 0 8px 30px rgba(232,101,26,0.4);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(232,101,26,0.5); }
+        /* Category Filters */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
 
-    /* ── SECTION WRAPPER ── */
-    section { padding: 80px 24px; }
-    .container { max-width: 1000px; margin: 0 auto; }
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--saffron);
-      margin-bottom: 8px;
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 700;
-      color: var(--deep);
-      margin-bottom: 40px;
-    }
+        .filter-btn {
+            background-color: transparent;
+            border: 2px solid var(--primary-green);
+            color: var(--primary-green);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
 
-    /* ── ABOUT STRIP ── */
-    .about-strip {
-      background: var(--deep);
-      padding: 60px 24px;
-    }
-    .about-grid {
-      max-width: 1000px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 32px;
-    }
-    .about-item { text-align: center; }
-    .about-icon { font-size: 2.2rem; margin-bottom: 10px; }
-    .about-item h3 {
-      font-family: 'Playfair Display', serif;
-      color: var(--gold);
-      font-size: 1.1rem;
-      margin-bottom: 6px;
-    }
-    .about-item p { color: #a0856e; font-size: 0.88rem; line-height: 1.5; }
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--primary-green);
+            color: var(--white);
+        }
 
-    /* ── MENU ── */
-    .menu-section { background: var(--smoke); }
-    .menu-categories {
-      display: flex; flex-wrap: wrap; gap: 10px;
-      margin-bottom: 36px;
-    }
-    .cat-btn {
-      background: #fff;
-      border: 2px solid #e8d5c0;
-      color: var(--muted);
-      font-weight: 600;
-      font-size: 0.85rem;
-      padding: 9px 20px;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .cat-btn.active, .cat-btn:hover {
-      background: var(--saffron);
-      border-color: var(--saffron);
-      color: #fff;
-    }
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
-    }
-    .menu-card {
-      background: #fff;
-      border-radius: 16px;
-      padding: 22px;
-      border: 1px solid #f0e4d4;
-      transition: transform 0.2s, box-shadow 0.2s;
-      display: none;
-    }
-    .menu-card.visible { display: block; }
-    .menu-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
-    .menu-card-emoji { font-size: 2rem; margin-bottom: 10px; }
-    .menu-card h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      color: var(--deep);
-      margin-bottom: 6px;
-    }
-    .menu-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+        /* Product Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            padding: 20px 5%;
+        }
 
-    /* ── ORDER FORM ── */
-    .order-section { background: var(--cream); }
-    .order-notice {
-      background: rgba(232,101,26,0.08);
-      border-left: 4px solid var(--saffron);
-      padding: 14px 18px;
-      border-radius: 0 10px 10px 0;
-      margin-bottom: 32px;
-      font-size: 0.9rem;
-      color: var(--text);
-    }
-    .order-notice strong { color: var(--saffron); }
-    .order-form {
-      background: #fff;
-      border-radius: 20px;
-      padding: 36px;
-      box-shadow: 0 4px 30px rgba(0,0,0,0.06);
-      max-width: 640px;
-    }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
-    .form-group label { font-size: 0.82rem; font-weight: 600; color: var(--muted); letter-spacing: 0.3px; }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      border: 1.5px solid #e8d5c0;
-      border-radius: 10px;
-      padding: 11px 14px;
-      font-size: 0.92rem;
-      font-family: 'DM Sans', sans-serif;
-      color: var(--text);
-      background: var(--cream);
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus { border-color: var(--saffron); }
-    .form-group textarea { resize: vertical; min-height: 90px; }
-    .order-btn {
-      width: 100%;
-      background: #25D366;
-      color: #fff;
-      border: none;
-      border-radius: 12px;
-      padding: 15px;
-      font-size: 1rem;
-      font-weight: 600;
-      font-family: 'DM Sans', sans-serif;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .order-btn:hover { background: #1ebe5d; transform: translateY(-1px); }
-    .order-note {
-      margin-top: 14px;
-      font-size: 0.8rem;
-      color: var(--muted);
-      text-align: center;
-    }
+        .product-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            position: relative;
+        }
 
-    /* ── INFO STRIP ── */
-    .info-strip {
-      background: var(--deep);
-      padding: 60px 24px;
-    }
-    .info-grid {
-      max-width: 1000px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 32px; text-align: center;
-    }
-    .info-item .info-icon { font-size: 2rem; margin-bottom: 10px; }
-    .info-item h4 { color: var(--gold); font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 6px; }
-    .info-item p { color: #c9b49a; font-size: 0.95rem; font-weight: 500; }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
 
-    /* ── FOOTER ── */
-    footer {
-      background: #100500;
-      color: #7A5C3E;
-      text-align: center;
-      padding: 28px 24px;
-      font-size: 0.82rem;
-    }
-    footer a { color: var(--saffron); text-decoration: none; }
+        .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--primary-orange);
+            color: white;
+            padding: 4px 8px;
+            font-size: 0.7rem;
+            border-radius: 4px;
+            font-weight: bold;
+        }
 
-    /* ── WHATSAPP FLOAT ── */
-    .wa-float {
-      position: fixed; bottom: 24px; right: 24px; z-index: 200;
-      background: #25D366;
-      color: #fff;
-      width: 58px; height: 58px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.6rem;
-      box-shadow: 0 6px 20px rgba(37,211,102,0.4);
-      text-decoration: none;
-      transition: transform 0.2s;
-    }
-    .wa-float:hover { transform: scale(1.1); }
+        .product-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
 
-    @media (max-width: 600px) {
-      .form-row { grid-template-columns: 1fr; }
-      .order-form { padding: 24px 18px; }
-      .nav-links { display: none; }
-    }
-  </style>
+        .product-info {
+            padding: 15px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--primary-green);
+        }
+
+        .product-desc {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            height: 35px;
+        }
+
+        .price-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        select, input[type="number"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            outline: none;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-orange);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-add {
+            background-color: var(--primary-green);
+            color: white;
+        }
+
+        .btn-add:hover {
+            background-color: #1e4229;
+        }
+
+        .btn-contact {
+            background-color: var(--primary-orange);
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .error-text {
+            color: red;
+            font-size: 0.8rem;
+            display: none;
+            margin-top: 5px;
+        }
+
+        /* Cart Sidebar Drawer */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 350px;
+            max-width: 100%;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -4px 0 15px rgba(0,0,0,0.1);
+            z-index: 200;
+            transition: 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 20px;
+            background-color: var(--primary-green);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-cart {
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        .cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        .cart-item h4 {
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item p {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        .cart-footer {
+            padding: 20px;
+            border-top: 1px solid #eee;
+            background: #fafafa;
+        }
+
+        .bill-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .bill-total {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary-orange);
+            margin-bottom: 15px;
+        }
+
+        /* Modals (Checkout & Success) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 300;
+        }
+
+        .modal {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal h2 {
+            margin-bottom: 20px;
+            color: var(--primary-green);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .delivery-note {
+            font-size: 0.8rem;
+            color: var(--primary-orange);
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .success-animation {
+            text-align: center;
+            padding: 30px 10px;
+        }
+
+        .success-animation h1 {
+            color: var(--primary-green);
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .success-animation p {
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+    </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">Wasim's Cloud Kitchen</div>
-  <div class="nav-links">
-    <a href="#menu">Menu</a>
-    <a href="#order">Order</a>
-    <a href="#info">Contact</a>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-spice">🌶️</div>
-  <div class="hero-spice">🍛</div>
-  <div class="hero-spice">🫙</div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">Solapur's Home Kitchen</div>
-    <h1>Wasim's<br/><span>Cloud Kitchen</span></h1>
-    <p class="hero-tagline">Homemade Goodness, Delivered with Love!<br/>Fresh ingredients. Authentic taste. Made with heart.</p>
-    <div class="hero-badges">
-      <span class="badge">🕐 10 AM – 7 PM</span>
-      <span class="badge">📍 Solapur Delivery</span>
-      <span class="badge">📦 Min. Order 1 KG</span>
-      <span class="badge">🏠 Homemade</span>
-    </div>
-    <a href="#order" class="hero-cta">Order Now on WhatsApp</a>
-  </div>
-</section>
-
-<!-- ABOUT STRIP -->
-<div class="about-strip">
-  <div class="about-grid">
-    <div class="about-item">
-      <div class="about-icon">🌿</div>
-      <h3>Fresh Ingredients</h3>
-      <p>Every dish made with fresh, handpicked ingredients — no shortcuts, ever.</p>
-    </div>
-    <div class="about-item">
-      <div class="about-icon">👩‍🍳</div>
-      <h3>Authentic Taste</h3>
-      <p>Traditional recipes passed down with love, cooked just like home.</p>
-    </div>
-    <div class="about-item">
-      <div class="about-icon">🛵</div>
-      <h3>Solapur Delivery</h3>
-      <p>Fresh, hot food delivered to your doorstep across Solapur city.</p>
-    </div>
-    <div class="about-item">
-      <div class="about-icon">📞</div>
-      <h3>Personal Confirmation</h3>
-      <p>Every order personally confirmed by Wasim before preparation.</p>
-    </div>
-  </div>
-</div>
-
-<!-- MENU -->
-<section class="menu-section" id="menu">
-  <div class="container">
-    <div class="section-label">What We Cook</div>
-    <div class="section-title">Our Menu</div>
-
-    <div class="menu-categories">
-      <button class="cat-btn active" onclick="filterMenu('all', this)">All Items</button>
-      <button class="cat-btn" onclick="filterMenu('mutton', this)">🥩 Mutton</button>
-      <button class="cat-btn" onclick="filterMenu('chicken', this)">🍗 Chicken</button>
-      <button class="cat-btn" onclick="filterMenu('rice', this)">🍚 Rice</button>
-      <button class="cat-btn" onclick="filterMenu('bread', this)">🫓 Breads</button>
-    </div>
-
-    <div class="menu-grid">
-      <!-- MUTTON -->
-      <div class="menu-card visible" data-cat="mutton">
-        <div class="menu-card-emoji">🥩</div>
-        <h4>Special Mutton Gravy</h4>
-        <p>Our signature rich, slow-cooked masterpiece.</p>
-      </div>
-      <div class="menu-card visible" data-cat="mutton">
-        <div class="menu-card-emoji">🍲</div>
-        <h4>Mutton Korma</h4>
-        <p>Classic Mughlai style with a creamy, nutty base.</p>
-      </div>
-      <div class="menu-card visible" data-cat="mutton">
-        <div class="menu-card-emoji">🌿</div>
-        <h4>Mutton Afghani</h4>
-        <p>Mildly spiced, velvety texture with a smoky touch.</p>
-      </div>
-      <div class="menu-card visible" data-cat="mutton">
-        <div class="menu-card-emoji">🥣</div>
-        <h4>Mutton Ka Marag</h4>
-        <p>A spicy, thin soulful mutton soup.</p>
-      </div>
-      <div class="menu-card visible" data-cat="mutton">
-        <div class="menu-card-emoji">🍛</div>
-        <h4>Mutton Dalcha</h4>
-        <p>Tangy mutton cooked with lentils and bottle gourd.</p>
-      </div>
-      <div class="menu-card visible" data-cat="mutton">
-        <div class="menu-card-emoji">🧆</div>
-        <h4>Mutton Kofte</h4>
-        <p>Succulent hand-rolled meatballs in a spiced gravy.</p>
-      </div>
-      <div class="menu-card visible" data-cat="mutton">
-        <div class="menu-card-emoji">🥩</div>
-        <h4>Mutton Kheema</h4>
-        <p>Minced meat sautéed with traditional spices.</p>
-      </div>
-      <div class="menu-card visible" data-cat="mutton">
-        <div class="menu-card-emoji">🌶️</div>
-        <h4>Mutton Achari</h4>
-        <p>Tangy and bold flavors inspired by pickling spices.</p>
-      </div>
-      <div class="menu-card visible" data-cat="mutton">
-        <div class="menu-card-emoji">🌱</div>
-        <h4>Green Kheema</h4>
-        <p>Minced meat cooked with fresh mint, cilantro, and chilies.</p>
-      </div>
-      <div class="menu-card visible" data-cat="mutton">
-        <div class="menu-card-emoji">🍃</div>
-        <h4>Methi Kheema</h4>
-        <p>Flavorful blend of minced meat and fresh fenugreek leaves.</p>
-      </div>
-
-      <!-- CHICKEN -->
-      <div class="menu-card visible" data-cat="chicken">
-        <div class="menu-card-emoji">🍗</div>
-        <h4>Special Chicken Gravy</h4>
-        <p>The ultimate homemade chicken comfort.</p>
-      </div>
-      <div class="menu-card visible" data-cat="chicken">
-        <div class="menu-card-emoji">🍲</div>
-        <h4>Chicken Korma</h4>
-        <p>Rich, aromatic, and perfectly balanced.</p>
-      </div>
-      <div class="menu-card visible" data-cat="chicken">
-        <div class="menu-card-emoji">🌿</div>
-        <h4>Chicken Dalcha</h4>
-        <p>A hearty combination of chicken and lentils.</p>
-      </div>
-      <div class="menu-card visible" data-cat="chicken">
-        <div class="menu-card-emoji">🥩</div>
-        <h4>Chicken Kheema</h4>
-        <p>Lean and flavorful minced chicken masala.</p>
-      </div>
-      <div class="menu-card visible" data-cat="chicken">
-        <div class="menu-card-emoji">🌶️</div>
-        <h4>Chicken Achari</h4>
-        <p>Spicy, zesty, full of "achari" punch.</p>
-      </div>
-      <div class="menu-card visible" data-cat="chicken">
-        <div class="menu-card-emoji">🌱</div>
-        <h4>Chicken Green Kheema</h4>
-        <p>Herby and fresh minced chicken preparation.</p>
-      </div>
-
-      <!-- RICE -->
-      <div class="menu-card visible" data-cat="rice">
-        <div class="menu-card-emoji">🍚</div>
-        <h4>Hyderabadi Special Biryani</h4>
-        <p>Authentic, fragrant, and deeply spiced.</p>
-      </div>
-      <div class="menu-card visible" data-cat="rice">
-        <div class="menu-card-emoji">🍛</div>
-        <h4>Mutton Biryani</h4>
-        <p>Layers of long-grain basmati and tender meat.</p>
-      </div>
-      <div class="menu-card visible" data-cat="rice">
-        <div class="menu-card-emoji">🍗</div>
-        <h4>Chicken Biryani</h4>
-        <p>Light, aromatic, and perfectly seasoned.</p>
-      </div>
-      <div class="menu-card visible" data-cat="rice">
-        <div class="menu-card-emoji">🫙</div>
-        <h4>Mutton / Chicken Pulao</h4>
-        <p>Simple, wholesome and flavorful.</p>
-      </div>
-      <div class="menu-card visible" data-cat="rice">
-        <div class="menu-card-emoji">🌾</div>
-        <h4>Jeera Rice</h4>
-        <p>Basmati rice tempered with cumin and ghee.</p>
-      </div>
-      <div class="menu-card visible" data-cat="rice">
-        <div class="menu-card-emoji">🥦</div>
-        <h4>Veg Pulao</h4>
-        <p>Loaded with fresh seasonal vegetables and spices.</p>
-      </div>
-
-      <!-- BREAD -->
-      <div class="menu-card visible" data-cat="bread">
-        <div class="menu-card-emoji">🫓</div>
-        <h4>Chapati</h4>
-        <p>Soft, handmade whole wheat flatbread.</p>
-      </div>
-      <div class="menu-card visible" data-cat="bread">
-        <div class="menu-card-emoji">🌾</div>
-        <h4>Jawari Roti</h4>
-        <p>Traditional, healthy Sorghum flatbread.</p>
-      </div>
-      <div class="menu-card visible" data-cat="bread">
-        <div class="menu-card-emoji">🌿</div>
-        <h4>Bajra Roti</h4>
-        <p>Hearty Pearl Millet bread, perfect for rustic curries.</p>
-      </div>
-      <div class="menu-card visible" data-cat="bread">
-        <div class="menu-card-emoji">✨</div>
-        <h4>Paratha</h4>
-        <p>Flaky, golden-brown, and layered with love.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ORDER FORM -->
-<section class="order-section" id="order">
-  <div class="container">
-    <div class="section-label">Place Your Order</div>
-    <div class="section-title">Order Now</div>
-
-    <div class="order-notice">
-      <strong>📞 How it works:</strong> Fill the form below → Your order goes directly to Wasim's WhatsApp → Wasim will personally call you to confirm your order!
-    </div>
-
-    <div class="order-form">
-      <div class="form-row">
-        <div class="form-group">
-          <label>Your Name *</label>
-          <input type="text" id="cName" placeholder="e.g. Aisha Khan" />
+    <!-- Navbar -->
+    <header>
+        <div class="brand">
+            <h1>Gharguti Swad</h1>
+            <p>Pure, Homemade, Authentic.</p>
         </div>
-        <div class="form-group">
-          <label>Phone Number *</label>
-          <input type="tel" id="cPhone" placeholder="e.g. 9876543210" />
+        <div class="cart-icon" onclick="toggleCart()">
+            🛒 <span class="cart-count" id="cart-count">0</span>
         </div>
-      </div>
+    </header>
 
-      <div class="form-group">
-        <label>Delivery Address *</label>
-        <input type="text" id="cAddress" placeholder="Your full address in Solapur" />
-      </div>
+    <!-- Filters -->
+    <div class="filters">
+        <button class="filter-btn active" onclick="filterCategory('all')">All Products</button>
+        <button class="filter-btn" onclick="filterCategory('pickles')">Authentic Pickles</button>
+        <button class="filter-btn" onclick="filterCategory('masala')">Traditional Masalas</button>
+        <button class="filter-btn" onclick="filterCategory('snacks')">Papad & Kurudi</button>
+        <button class="filter-btn" onclick="filterCategory('vermicelli')">Sevaiyan</button>
+    </div>
 
-      <div class="form-group">
-        <label>What would you like to order? *</label>
-        <textarea id="cOrder" placeholder="e.g. 1 KG Mutton Biryani, 500g Mutton Korma, 4 Chapatis..."></textarea>
-      </div>
+    <!-- Products Grid -->
+    <div class="products-grid" id="products-grid">
+        <!-- Products injected via JS -->
+    </div>
 
-      <div class="form-row">
-        <div class="form-group">
-          <label>Preferred Delivery Time</label>
-          <select id="cTime">
-            <option value="">Select time</option>
-            <option>10:00 AM – 12:00 PM</option>
-            <option>12:00 PM – 2:00 PM</option>
-            <option>2:00 PM – 4:00 PM</option>
-            <option>4:00 PM – 6:00 PM</option>
-            <option>6:00 PM – 7:00 PM</option>
-          </select>
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Basket</h3>
+            <span class="close-cart" onclick="toggleCart()">&times;</span>
         </div>
-        <div class="form-group">
-          <label>Any Special Instructions?</label>
-          <input type="text" id="cNote" placeholder="Less spicy, extra gravy..." />
+        <div class="cart-items" id="cart-items">
+            <!-- Items injected via JS -->
         </div>
-      </div>
-
-      <button class="order-btn" onclick="sendOrder()">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        Send Order on WhatsApp
-      </button>
-      <p class="order-note">⚠️ Minimum order: 1 KG &nbsp;|&nbsp; Delivery only in Solapur &nbsp;|&nbsp; Orders accepted 10 AM – 7 PM</p>
+        <div class="cart-footer">
+            <div class="bill-row"><span>Subtotal:</span> <span id="cart-subtotal">₹0</span></div>
+            <div class="bill-row"><span>Delivery Charge:</span> <span id="cart-delivery">₹0</span></div>
+            <div class="bill-row bill-total"><span>Total:</span> <span id="cart-total">₹0</span></div>
+            <p style="font-size: 0.75rem; color: #777; margin-bottom: 10px;">Free delivery on orders above ₹500</p>
+            <button class="btn btn-add" onclick="openCheckout()">Proceed to Checkout</button>
+        </div>
     </div>
-  </div>
-</section>
 
-<!-- INFO STRIP -->
-<div class="info-strip" id="info">
-  <div class="info-grid">
-    <div class="info-item">
-      <div class="info-icon">🕐</div>
-      <h4>Order Timings</h4>
-      <p>10:00 AM – 7:00 PM<br/>Daily</p>
+    <!-- Checkout Modal -->
+    <div class="modal-overlay" id="checkout-modal">
+        <div class="modal">
+            <h2>Complete Your Order</h2>
+            <form id="checkout-form" onsubmit="submitOrder(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="c-name" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="c-phone" pattern="[0-9]{10}" placeholder="10-digit number" required>
+                </div>
+                <div class="form-group">
+                    <label>Delivery Area</label>
+                    <select id="c-area" onchange="checkArea()" required>
+                        <option value="">-- Select Area --</option>
+                        <option value="solapur">Within Solapur City</option>
+                        <option value="outside">Outside Solapur</option>
+                    </select>
+                    <p id="area-error" class="error-text">Sorry! We currently only deliver within Solapur City limits.</p>
+                </div>
+                <div class="form-group">
+                    <label>Detailed Address</label>
+                    <textarea id="c-address" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <input type="text" value="Cash on Delivery (COD)" disabled>
+                </div>
+                <p class="delivery-note">Standard Delivery: Within 7 Days (एक हफ्ते के अंदर डिलीवरी)</p>
+                <button type="submit" class="btn btn-add" id="place-order-btn">Place Order (₹<span id="btn-total">0</span>)</button>
+            </form>
+        </div>
     </div>
-    <div class="info-item">
-      <div class="info-icon">📍</div>
-      <h4>Location</h4>
-      <p>Solapur, Maharashtra</p>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="success-modal">
+        <div class="modal success-animation">
+            <h1>🎉</h1>
+            <h2 style="color: var(--primary-green);">Order Placed Successfully!</h2>
+            <p>Thank you for choosing Gharguti Swad. Your authentic homemade products will reach you within 7 days.</p>
+            <p><strong>Payment mode:</strong> Cash on Delivery</p>
+            <button class="btn btn-contact" style="margin-top: 15px;" onclick="closeSuccess()">Continue Shopping</button>
+        </div>
     </div>
-    <div class="info-item">
-      <div class="info-icon">📱</div>
-      <h4>WhatsApp / Call</h4>
-      <p><a href="https://wa.me/919209414700" style="color:#25D366;">9209414700</a></p>
-    </div>
-    <div class="info-item">
-      <div class="info-icon">📦</div>
-      <h4>Minimum Order</h4>
-      <p>1 KG and above</p>
-    </div>
-  </div>
-</div>
 
-<!-- FOOTER -->
-<footer>
-  <p>© 2026 Wasim's Cloud Kitchen, Solapur &nbsp;|&nbsp; Made with ❤️ &nbsp;|&nbsp; <a href="https://wa.me/919209414700">WhatsApp: 9209414700</a></p>
-</footer>
+    <script>
+        // --- 🤖 TELEGRAM BOT SETTINGS (Sufyan, yahan apne bot details daalein) ---
+        const TELEGRAM_BOT_TOKEN = 'YOUR_BOT_TOKEN_HERE'; 
+        const TELEGRAM_CHAT_ID = 'YOUR_CHAT_ID_HERE';
 
-<!-- WhatsApp Float Button -->
-<a class="wa-float" href="https://wa.me/919209414700" target="_blank" title="Chat on WhatsApp">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-</a>
+        // --- 📦 PRODUCT CATALOG DATA ---
+        const products = [
+            { id: 'p1', name: 'Nimbu ka Achar', category: 'pickles', image: '1000097835.png', desc: 'Tangy homemade lemon pickle with traditional spices.', type: 'variant', variants: [{size: '250g', price: 60}, {size: '500g', price: 120}, {size: '1kg', price: 220}] },
+            { id: 'p2', name: 'Kairi ka Achar', category: 'pickles', image: '1000097731.png', desc: 'Spicy and authentic raw mango pickle.', type: 'variant', variants: [{size: '250g', price: 80}, {size: '500g', price: 150}, {size: '1kg', price: 290}] },
+            { id: 'p3', name: 'Nimbu ka Mitha Achar', category: 'pickles', image: '1000097835.png', desc: 'Sweet & sour lemon pickle, loved by everyone.', type: 'variant', variants: [{size: '250g', price: 49}, {size: '500g', price: 90}, {size: '1kg', price: 160}] },
+            { id: 'p4', name: 'Sandgi Mirchi (Dahi ki Mirch)', category: 'masala', image: '1000097866.png', desc: 'Sun-dried curd chilies, perfect for frying.', type: 'fixed', price: 150, unit: 'Packet' },
+            { id: 'p5', name: 'Lalmirch Powder', category: 'masala', image: '1000097820.png', desc: 'Pure, fiery red chili powder grounded at home.', type: 'variant', variants: [{size: '500g', price: 275}, {size: '1kg', price: 550}] },
+            { id: 'p6', name: 'Chawal ki Kurudi', category: 'snacks', image: '1000098199.png', desc: 'Crispy rice fryums, a traditional Maharashtrian snack.', type: 'variant', variants: [{size: '500g', price: 90}, {size: '1kg', price: 180}] },
+            { id: 'p7', name: 'Chawal ke Papad', category: 'snacks', image: '1000098199.png', desc: 'Handmade thin rice papads.', type: 'min-qty', price: 1, min: 50, unit: 'piece' },
+            { id: 'p8', name: 'Gehun ki Kurudi', category: 'snacks', image: '1000098199.png', desc: 'Premium wheat kurudi. Made fresh on order.', type: 'contact', variants: [{size: '500g', price: 300}, {size: '1kg', price: 600}], badge: 'Made on Order' },
+            { id: 'p9', name: 'Gehun/Rawa Mix Sivayyan', category: 'vermicelli', image: '1000097832.png', desc: 'Hand-rolled wheat & rawa vermicelli.', type: 'fixed', price: 220, unit: '1kg (Min. Order)' }
+        ];
 
-<script>
-  function filterMenu(cat, btn) {
-    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.menu-card').forEach(card => {
-      if (cat === 'all' || card.dataset.cat === cat) {
-        card.classList.add('visible');
-      } else {
-        card.classList.remove('visible');
-      }
-    });
-  }
+        let cart = [];
 
-  function sendOrder() {
-    const name    = document.getElementById('cName').value.trim();
-    const phone   = document.getElementById('cPhone').value.trim();
-    const address = document.getElementById('cAddress').value.trim();
-    const order   = document.getElementById('cOrder').value.trim();
-    const time    = document.getElementById('cTime').value;
-    const note    = document.getElementById('cNote').value.trim();
+        // --- 🎨 RENDER PRODUCTS ---
+        function renderProducts(filter = 'all') {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
 
-    if (!name || !phone || !address || !order) {
-      alert('Please fill in your name, phone, address, and order details.');
-      return;
-    }
+            products.forEach(p => {
+                if(filter !== 'all' && p.category !== filter) return;
 
-    let msg = `🍛 *New Order – Wasim's Cloud Kitchen*\n\n`;
-    msg += `👤 *Name:* ${name}\n`;
-    msg += `📱 *Phone:* ${phone}\n`;
-    msg += `📍 *Address:* ${address}\n`;
-    msg += `🛒 *Order:* ${order}\n`;
-    if (time) msg += `🕐 *Preferred Time:* ${time}\n`;
-    if (note) msg += `📝 *Special Instructions:* ${note}\n`;
-    msg += `\n_Order placed via website_`;
+                let actionHTML = '';
+                let priceHTML = '';
 
-    const encoded = encodeURIComponent(msg);
-    window.open(`https://wa.me/919209414700?text=${encoded}`, '_blank');
-  }
-</script>
+                if (p.type === 'variant') {
+                    let options = p.variants.map((v, i) => `<option value="${i}">${v.size}</option>`).join('');
+                    priceHTML = `
+                        <select id="var-${p.id}" onchange="updateCardPrice('${p.id}')">
+                            ${options}
+                        </select>
+                        <span class="price" id="price-${p.id}">₹${p.variants[0].price}</span>
+                    `;
+                    actionHTML = `<button class="btn btn-add" onclick="addToCartVariant('${p.id}')">Add to Cart</button>`;
+                } 
+                else if (p.type === 'fixed') {
+                    priceHTML = `<span>${p.unit}</span> <span class="price">₹${p.price}</span>`;
+                    actionHTML = `<button class="btn btn-add" onclick="addToCartFixed('${p.id}')">Add to Cart</button>`;
+                }
+                else if (p.type === 'contact') {
+                    priceHTML = `<span style="font-size:0.9rem;">₹${p.variants[0].price} (500g) / ₹${p.variants[1].price} (1kg)</span>`;
+                    actionHTML = `<a href="tel:9209414700" class="btn btn-contact">📞 Contact to Order</a>`;
+                }
+                else if (p.type === 'min-qty') {
+                    priceHTML = `
+                        <div>
+                            <input type="number" id="qty-${p.id}" value="${p.min}" min="1" style="width: 70px;"> 
+                            <span> pcs</span>
+                        </div>
+                        <span class="price">₹${p.price}/pc</span>
+                    `;
+                    actionHTML = `
+                        <button class="btn btn-add" onclick="addToCartMinQty('${p.id}')">Add to Cart</button>
+                        <div id="err-${p.id}" class="error-text">Minimum order is ${p.min} pieces.</div>
+                    `;
+                }
+
+                const badgeHTML = p.badge ? `<div class="badge">${p.badge}</div>` : '';
+
+                const card = `
+                    <div class="product-card">
+                        ${badgeHTML}
+                        <img src="${p.image}" alt="${p.name}" class="product-img">
+                        <div class="product-info">
+                            <h3 class="product-title">${p.name}</h3>
+                            <p class="product-desc">${p.desc}</p>
+                            <div class="price-section">${priceHTML}</div>
+                            ${actionHTML}
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
+        // UI Interactions
+        function filterCategory(cat) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            renderProducts(cat);
+        }
+
+        function updateCardPrice(id) {
+            const product = products.find(p => p.id === id);
+            const index = document.getElementById(`var-${id}`).value;
+            document.getElementById(`price-${id}`).innerText = `₹${product.variants[index].price}`;
+        }
+
+        // --- 🛒 CART LOGIC ---
+        function addToCartVariant(id) {
+            const product = products.find(p => p.id === id);
+            const index = document.getElementById(`var-${id}`).value;
+            const variant = product.variants[index];
+            pushToCart(product.name, variant.size, variant.price, 1);
+        }
+
+        function addToCartFixed(id) {
+            const product = products.find(p => p.id === id);
+            pushToCart(product.name, product.unit, product.price, 1);
+        }
+
+        function addToCartMinQty(id) {
+            const product = products.find(p => p.id === id);
+            const qtyInput = document.getElementById(`qty-${id}`);
+            const errText = document.getElementById(`err-${id}`);
+            const qty = parseInt(qtyInput.value);
+
+            if(qty < product.min) {
+                qtyInput.style.borderColor = 'red';
+                errText.style.display = 'block';
+                return;
+            }
+            qtyInput.style.borderColor = '#ccc';
+            errText.style.display = 'none';
+            pushToCart(product.name, `${qty} pcs`, product.price * qty, 1); // Grouping as 1 bulk item in cart for simplicity
+        }
+
+        function pushToCart(name, details, price, qty) {
+            cart.push({ name, details, price });
+            updateCartUI();
+            
+            // Subtle flash animation on cart icon
+            const cartIcon = document.querySelector('.cart-icon');
+            cartIcon.style.transform = 'scale(1.2)';
+            setTimeout(() => cartIcon.style.transform = 'scale(1)', 200);
+        }
+
+        function updateCartUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const cartItemsDiv = document.getElementById('cart-items');
+            cartItemsDiv.innerHTML = '';
+
+            let subtotal = 0;
+
+            cart.forEach((item, index) => {
+                subtotal += item.price;
+                cartItemsDiv.innerHTML += `
+                    <div class="cart-item">
+                        <div>
+                            <h4>${item.name}</h4>
+                            <p>${item.details}</p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p style="font-weight:bold; color: var(--primary-orange);">₹${item.price}</p>
+                            <span style="color:red; cursor:pointer; font-size:0.8rem;" onclick="removeFromCart(${index})">Remove</span>
+                        </div>
+                    </div>
+                `;
+            });
+
+            if(cart.length === 0) {
+                cartItemsDiv.innerHTML = '<p style="text-align:center; margin-top:20px; color:#777;">Your cart is empty.</p>';
+            }
+
+            // Delivery Logic
+            let delivery = 0;
+            if (subtotal > 0 && subtotal <= 500) {
+                delivery = 50;
+            }
+            let total = subtotal + delivery;
+
+            document.getElementById('cart-subtotal').innerText = `₹${subtotal}`;
+            document.getElementById('cart-delivery').innerText = subtotal > 500 ? 'Free' : `₹${delivery}`;
+            document.getElementById('cart-total').innerText = `₹${total}`;
+            document.getElementById('btn-total').innerText = total;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-sidebar').classList.toggle('open');
+        }
+
+        // --- 💳 CHECKOUT & FORM LOGIC ---
+        function openCheckout() {
+            if(cart.length === 0) {
+                alert("Please add some items to your cart first.");
+                return;
+            }
+            toggleCart();
+            document.getElementById('checkout-modal').style.display = 'flex';
+        }
+
+        function checkArea() {
+            const area = document.getElementById('c-area').value;
+            const btn = document.getElementById('place-order-btn');
+            const err = document.getElementById('area-error');
+            
+            if (area === 'outside') {
+                btn.disabled = true;
+                btn.style.backgroundColor = '#ccc';
+                err.style.display = 'block';
+            } else {
+                btn.disabled = false;
+                btn.style.backgroundColor = 'var(--primary-green)';
+                err.style.display = 'none';
+            }
+        }
+
+        // --- 🚀 SUBMIT ORDER & TELEGRAM API ---
+        async function submitOrder(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('place-order-btn');
+            btn.innerText = "Processing...";
+            btn.disabled = true;
+
+            const name = document.getElementById('c-name').value;
+            const phone = document.getElementById('c-phone').value;
+            const address = document.getElementById('c-address').value;
+            
+            // Bill Calc
+            let subtotal = 0;
+            let orderText = '';
+            cart.forEach(item => {
+                subtotal += item.price;
+                orderText += `- ${item.name} (${item.details}) : ₹${item.price}\n`;
+            });
+            let delivery = (subtotal <= 500) ? 50 : 0;
+            let total = subtotal + delivery;
+
+            // Prepare Telegram Message
+            const message = `
+🛍️ *NEW ORDER - GHARGUTI SWAD* 🛍️
+
+*Customer:* ${name}
+*Phone:* ${phone}
+*Address:* ${address} (Solapur)
+
+*Items Ordered:*
+${orderText}
+*Subtotal:* ₹${subtotal}
+*Delivery:* ₹${delivery}
+*Grand Total:* ₹${total} (COD)
+            `;
+
+            // If Tokens are set, send to Telegram
+            if(TELEGRAM_BOT_TOKEN !== 'YOUR_BOT_TOKEN_HERE') {
+                const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+                try {
+                    await fetch(url, {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            chat_id: TELEGRAM_CHAT_ID,
+                            text: message,
+                            parse_mode: 'Markdown'
+                        })
+                    });
+                } catch(error) {
+                    console.log("Error sending alert: ", error);
+                }
+            } else {
+                console.log("Telegram Token not set. Order details:", message);
+            }
+
+            // Show Success Animation
+            document.getElementById('checkout-modal').style.display = 'none';
+            document.getElementById('success-modal').style.display = 'flex';
+            
+            // Reset Cart & Form
+            cart = [];
+            updateCartUI();
+            document.getElementById('checkout-form').reset();
+            btn.innerText = `Place Order`;
+            btn.disabled = false;
+        }
+
+        function closeSuccess() {
+            document.getElementById('success-modal').style.display = 'none';
+        }
+
+        // Init
+        renderProducts();
+    </script>
 </body>
 </html>
