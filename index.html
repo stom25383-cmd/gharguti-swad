@@ -69,13 +69,18 @@
             font-weight: bold;
         }
 
-        /* Category Filters */
+                /* Category Filters */
         .filters {
             display: flex;
-            justify-content: center;
             gap: 10px;
-            padding: 20px;
-            flex-wrap: wrap;
+            padding: 15px 5%;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* Firefox के लिए स्क्रॉलबार हाईड */
+        }
+        .filters::-webkit-scrollbar {
+            display: none; /* Chrome/Safari के लिए स्क्रॉलबार हाईड */
         }
 
         .filter-btn {
@@ -87,7 +92,10 @@
             cursor: pointer;
             font-weight: bold;
             transition: 0.3s;
+            flex-shrink: 0; /* यह बटन्स को सिकुड़ने से रोकेगा */
+            white-space: nowrap; /* टेक्स्ट को एक ही लाइन में रखेगा */
         }
+
 
         .filter-btn.active, .filter-btn:hover {
             background-color: var(--primary-green);
